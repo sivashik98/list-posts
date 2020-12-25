@@ -1,0 +1,48 @@
+.item {
+  display: flex;
+  align-items: center;
+  background-color: pink;
+  border-radius: 6px;
+  border: 2px solid #977178;
+  padding: 15px;
+  user-select: none;
+
+  &WrapSvg {
+    display: flex;
+  }
+
+  &Svg {
+    transition: color .5s;
+    margin-right: 20px;
+
+    &Like {
+      color: rgba(255, 0, 0, 0.55);
+      cursor: pointer;
+
+      &:hover {
+        color: darkred;
+      }
+    }
+
+    &Trash {
+      color: rgba(0, 198, 255, 0.45);
+      cursor: pointer;
+
+      &:hover {
+        color: darkcyan;
+      }
+    }
+
+
+  }
+
+  &Link {
+    color: #005a60;
+    transition: color .5s;
+    text-decoration: none;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
