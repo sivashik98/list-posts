@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import "./fontAwesome";
+import "./assets/fontAwesome";
 import "./index.scss";
 import Root from "./containers/Root";
 

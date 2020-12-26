@@ -6,7 +6,7 @@ export const REORDER_POSTS = "POSTS/REORDER_POSTS";
 
 export const HIDE_WARNING = "POSTS/HIDE_WARNING";
 
-export const LIKE_POST = "POSTS/LIKE_POST";
+export const TOGGLE_LIKE_POST = "POSTS/TOGGLE_LIKE_POST";
 export const DELETE_POST = "POSTS/DELETE_POST";
 
 export const UNDO = "POSTS/UNDO";

@@ -4,12 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./item.scss";
 import { useDispatch } from "react-redux";
-import {
-  likePost,
-  deletePost,
-  undoAction,
-  redoAction,
-} from "../../store/actions/posts";
+import { toggleLikePost, deletePost } from "../../store/actions/posts";
 
 const likeColorSvg = "darkred";
 
@@ -17,12 +12,14 @@ const Item = ({ id, title, liked, url, style, isFetching, provided }) => {
   const dispatch = useDispatch();
 
   const handleLike = (id) => () => {
-    dispatch(likePost(id));
+    dispatch(toggleLikePost(id));
   };
 
   const handleDelete = (id) => () => {
     dispatch(deletePost(id));
   };
+
+  // const handleRestore = () => {};
 
   // console.log(isFetching);
   // if (isFetching) {

@@ -3,11 +3,11 @@ import thunkMiddleware from "redux-thunk";
 
 import rootReducer from "./rootReducer";
 
-const configureStore = (initialState) => {
+const configureStore = (initialState, saga) => {
   return createStore(
     rootReducer,
     initialState,
-    applyMiddleware(thunkMiddleware)
+    applyMiddleware(thunkMiddleware, saga)
   );
 };
 

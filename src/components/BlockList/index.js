@@ -4,6 +4,8 @@ import ReactDOM from "react-dom";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { List, AutoSizer } from "react-virtualized";
 
+import { ActionCreators } from "redux-undo";
+
 import { undoAction, redoAction } from "../../store/actions/posts";
 
 import "./blockList.scss";
@@ -51,20 +53,22 @@ const BlockList = ({ list, isFetching }) => {
     }
   };
 
+  const handleUndo = () => {
+    dispatch(ActionCreators.undo());
+  };
+
+  const handleRedo = () => {
+    dispatch(ActionCreators.redo());
+  };
+
   return (
     <>
       <div className="blockListControl">
-        <div
-          className="blockListControlButton"
-          onClick={() => dispatch(undoAction())}
-        >
+        <div className="blockListControlButton" onClick={handleUndo}>
           UNDO
         </div>
 
-        <div
-          className="blockListControlButton"
-          onClick={() => dispatch(redoAction())}
-        >
+        <div className="blockListControlButton" onClick={handleRedo}>
           REDO
         </div>
       </div>
