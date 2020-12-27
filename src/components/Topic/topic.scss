@@ -1,4 +1,4 @@
-$widthAnimation: 800px;
+$widthAnimation: 1400px;
 
 .topic {
   display: flex;
@@ -13,7 +13,11 @@ $widthAnimation: 800px;
   border: 1px solid #977178;
   transition: background-color 0.6s;
   cursor: pointer;
-  animation: slide 12s ease infinite 1s;
+  animation: slide 15s ease infinite 1s;
+
+  &:first-child {
+    margin: 0;
+  }
 
   &:hover {
     background-color: rgb(202, 150, 156);

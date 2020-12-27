@@ -1,4 +1,4 @@
-export const reorderPostsHelper = (list, startIndex, endIndex) => {
+export const shufflePosts = (list, startIndex, endIndex) => {
   const result = [...list];
   const [removed] = result.splice(startIndex, 1);
 

@@ -1,10 +1,16 @@
-// import { DELETE_TOPIC, CREATE_TOPIC } from "../constants/constatns";
+import { CREATE_TOPIC } from "../constatns";
 
 const initialState = {
-  topics: ["Frontend", "ReactJS", "VueJS", "Angular"],
+  topics: [],
 };
 
 const handleTopics = (state = initialState, action) => {
+  const { topics } = state;
+
+  if (action.type === CREATE_TOPIC) {
+    return { ...state, topics: [...topics, action.payload] };
+  }
+
   return state;
 };
 

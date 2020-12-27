@@ -1,7 +1,9 @@
 import {
   DISABLE_INTERACTION,
   ENABLE_INTERACTION,
-} from "../constants/constatns";
+  SHOW_WARNING,
+  HIDE_WARNING,
+} from "../constatns";
 
 export const disableInteraction = () => ({
   type: DISABLE_INTERACTION,
@@ -9,4 +11,13 @@ export const disableInteraction = () => ({
 
 export const enableInteraction = () => ({
   type: ENABLE_INTERACTION,
+});
+
+export const showWarning = (warning) => ({
+  type: SHOW_WARNING,
+  payload: warning,
+});
+
+export const hideWarning = () => ({
+  type: HIDE_WARNING,
 });

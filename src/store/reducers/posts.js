@@ -3,24 +3,18 @@ import {
   FETCH_POST_FAIL,
   FETCH_POST_SUCCESS,
   REORDER_POSTS,
-  HIDE_WARNING,
   TOGGLE_LIKE_POST,
   DELETE_POST,
-  UNDO,
-  REDO,
-} from "../constants/constatns";
+} from "../constatns";
 
 const initialState = {
-  pastPosts: [],
-  presentPosts: [],
-  futurePosts: [],
+  posts: [],
   isFetching: false,
-  warning: null,
 };
 const additionalProperties = { liked: false };
 
 const handlePosts = (state = initialState, action) => {
-  const { pastPosts, presentPosts, futurePosts, isFetching, warning } = state;
+  const { posts } = state;
 
   if (action.type === FETCH_POST) {
     return {
@@ -32,26 +26,23 @@ const handlePosts = (state = initialState, action) => {
   if (action.type === FETCH_POST_SUCCESS) {
     return {
       ...state,
-      presentPosts: [
-        ...presentPosts,
-        { ...action.payload, ...additionalProperties },
-      ],
+      posts: [...posts, { ...action.payload, ...additionalProperties }],
       isFetching: false,
     };
   }
 
   if (action.type === FETCH_POST_FAIL) {
-    return { ...state, isFetching: false, warning: action.payload };
+    return { ...state, isFetching: false };
   }
 
   if (action.type === REORDER_POSTS) {
-    return { ...state, presentPosts: action.payload };
+    return { ...state, posts: action.payload };
   }
 
   if (action.type === TOGGLE_LIKE_POST) {
     return {
       ...state,
-      presentPosts: presentPosts.map((el) =>
+      posts: posts.map((el) =>
         el.id === action.payload ? { ...el, liked: !el.liked } : el
       ),
     };
@@ -60,24 +51,8 @@ const handlePosts = (state = initialState, action) => {
   if (action.type === DELETE_POST) {
     return {
       ...state,
-      presentPosts: presentPosts.filter((el) => el.id !== action.payload),
-      pastPosts: [
-        ...pastPosts,
-        presentPosts.find((el) => el.id === action.payload),
-      ],
+      posts: posts.filter((el) => el.id !== action.payload),
     };
-  }
-
-  if (action.type === UNDO) {
-    return { ...state, presentPosts: action.payload };
-  }
-
-  if (action.type === REDO) {
-    return { ...state, presentPosts: action.payload };
-  }
-
-  if (action.type === HIDE_WARNING) {
-    return { ...state, warning: null };
   }
 
   return state;

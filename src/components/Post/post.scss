@@ -1,4 +1,4 @@
-.item {
+.post {
   display: flex;
   align-items: center;
   background-color: pink;
@@ -6,6 +6,12 @@
   border: 2px solid #977178;
   padding: 15px;
   user-select: none;
+
+  &Loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   &WrapSvg {
     display: flex;

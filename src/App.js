@@ -2,21 +2,19 @@ import React from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 
-import BlockList from "./components/BlockList";
+import "./app.scss";
+import ListPosts from "./components/ListPosts";
 import Topic from "./components/Topic";
-import ModalWindow from "./components/ModalWindow";
-import { reorderPostsHelper } from "./helpers/reorderPostsHelper";
-import {
-  fetchPostByTopic,
-  reorderPosts,
-  hideWarning,
-} from "./store/actions/posts";
+import WarningModal from "./components/WarningModal";
+import TopicsForm from "./components/TopicsForm";
+import { shufflePosts } from "./helpers/shufflePosts";
+
+import { fetchPostByTopic, reorderPosts } from "./store/actions/posts";
+import { hideWarning } from "./store/actions/app";
 
 const App = () => {
-  const { interaction } = useSelector((state) => state.app);
-  const { presentPosts: posts, isFetching, warning } = useSelector(
-    (state) => state.posts.present
-  );
+  const { interaction, warning } = useSelector((state) => state.app);
+  const { posts } = useSelector((state) => state.posts.present);
   const { topics } = useSelector((state) => state.topics);
   const dispatch = useDispatch();
 
@@ -35,30 +33,34 @@ const App = () => {
       return;
     }
 
-    const newPosts = reorderPostsHelper(
+    const shuffledPosts = shufflePosts(
       posts,
       result.source.index,
       result.destination.index
     );
 
-    dispatch(reorderPosts(newPosts));
+    dispatch(reorderPosts(shuffledPosts));
   };
 
   const handleCloseModal = () => {
     dispatch(hideWarning());
   };
-  // console.log(interaction);
+
   return (
     <>
-      <ModalWindow warning={warning} onClick={handleCloseModal} />
-
       {topics.map((el) => (
-        <Topic key={el} title={el} onClick={handleClick(el)} />
+        <Topic key={el.id} title={el.title} onClick={handleClick(el)} />
       ))}
 
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <BlockList list={posts} isFetching={isFetching} />
-      </DragDropContext>
+      <div className="appWrap">
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <ListPosts list={posts} />
+        </DragDropContext>
+
+        <TopicsForm topics={topics} />
+      </div>
+
+      <WarningModal warning={warning} onClick={handleCloseModal} />
     </>
   );
 };

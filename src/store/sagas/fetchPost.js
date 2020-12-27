@@ -1,9 +1,10 @@
 import { takeEvery, put, call } from "redux-saga/effects";
 import fetch from "isomorphic-fetch";
 
-import { FETCH_POST } from "./../constants/constatns";
+import { FETCH_POST } from "../constatns";
 import { disableInteraction, enableInteraction } from "./../actions/app";
-import { showWarningFailedPost, pushFetchedPost } from "./../actions/posts";
+import { pushFetchedPost, removeFetchingStatus } from "./../actions/posts";
+import { showWarning } from "./../actions/app";
 
 const getUniquePostHelper = (posts, existedPosts) => {
   return posts.filter((post) =>
@@ -12,9 +13,9 @@ const getUniquePostHelper = (posts, existedPosts) => {
 };
 
 const fetchPostHelper = (payload) => () => {
-  return fetch(`https://www.reddit.com/r/${payload}.json`).then((response) =>
-    response.json()
-  );
+  return fetch(
+    `https://www.reddit.com/r/${payload.title}.json`
+  ).then((response) => response.json());
 };
 
 function* fetchPostWorker({ payload }) {
@@ -30,14 +31,16 @@ function* fetchPostWorker({ payload }) {
     } else {
       const warning = "Актуальные посты закончились";
 
-      yield put(showWarningFailedPost(warning));
+      yield put(showWarning(warning));
+      yield put(removeFetchingStatus());
     }
 
     yield put(enableInteraction());
   } catch (e) {
     const warning = "Ошибка запроса постов";
 
-    yield put(showWarningFailedPost(warning));
+    yield put(showWarning(warning));
+    yield put(removeFetchingStatus());
     yield put(enableInteraction());
   }
 }

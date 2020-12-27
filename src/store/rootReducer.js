@@ -1,17 +1,31 @@
 import { combineReducers } from "redux";
+import undoable, { includeAction, ActionTypes } from "redux-undo";
 
-import undoable from "redux-undo";
-import { UNDO, REDO } from "./constants/constatns";
-
+import {
+  FETCH_POST_SUCCESS,
+  DELETE_POST,
+  TOGGLE_LIKE_POST,
+  REORDER_POSTS,
+} from "./constatns";
 import posts from "./reducers/posts";
 import app from "./reducers/app";
 import topics from "./reducers/topics";
 
-const config = { limit: 30, undoType: UNDO, redoType: REDO };
+const undoableConfig = {
+  limit: 30,
+  undoType: ActionTypes.UNDO,
+  redoType: ActionTypes.REDO,
+  filter: includeAction([
+    FETCH_POST_SUCCESS,
+    REORDER_POSTS,
+    DELETE_POST,
+    TOGGLE_LIKE_POST,
+  ]),
+};
 
 const rootReducer = combineReducers({
   app,
-  posts: undoable(posts, config),
+  posts: undoable(posts, undoableConfig),
   topics,
 });
 

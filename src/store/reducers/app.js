@@ -1,10 +1,13 @@
 import {
   DISABLE_INTERACTION,
   ENABLE_INTERACTION,
-} from "../constants/constatns";
+  SHOW_WARNING,
+  HIDE_WARNING,
+} from "../constatns";
 
 const initialState = {
   interaction: true,
+  warning: null,
 };
 
 const handleApp = (state = initialState, action) => {
@@ -14,6 +17,14 @@ const handleApp = (state = initialState, action) => {
 
   if (action.type === ENABLE_INTERACTION) {
     return { ...state, interaction: true };
+  }
+
+  if (action.type === SHOW_WARNING) {
+    return { ...state, warning: action.payload };
+  }
+
+  if (action.type === HIDE_WARNING) {
+    return { ...state, warning: null };
   }
 
   return state;

@@ -1,0 +1,26 @@
+.warningModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  max-width: 550px;
+  background-color: #f5f5f5;
+  border: 2px solid #cdcdcd;
+  border-radius: 8px;
+  outline: none;
+
+  &Wrap {
+    word-wrap: break-word;
+    text-align: center;
+  }
+
+  &Text {
+    color: #ab0000;
+    font-size: 24px;
+    margin-bottom: 50px;
+  }
+}

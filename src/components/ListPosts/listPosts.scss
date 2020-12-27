@@ -1,0 +1,25 @@
+.listPosts {
+  flex: 3;
+  height: 450px;
+
+  &Control {
+    display: flex;
+    align-items: center;
+
+    &Btn {
+      margin-left: 20px;
+
+      &:first-child {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  }
+
+  &Form {
+    background-color: rgba(0, 95, 103, 0.24);
+    border: 2px solid rgba(0, 95, 103, 0.52);
+    padding: 10px;
+    outline: none;
+  }
+}
