@@ -1,14 +1,24 @@
 import { createStore, applyMiddleware } from "redux";
-import thunkMiddleware from "redux-thunk";
+import { persistStore, persistReducer } from "redux-persist";
+import sessionStorage from "redux-persist/lib/storage/session";
 
 import rootReducer from "./rootReducer";
 
+const persistConfig = {
+  key: "root",
+  storage: sessionStorage,
+};
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 const configureStore = (initialState, saga) => {
-  return createStore(
-    rootReducer,
+  const store = createStore(
+    persistedReducer,
     initialState,
-    applyMiddleware(thunkMiddleware, saga)
+    applyMiddleware(saga)
   );
+  const persistent = persistStore(store);
+
+  return { store, persistent };
 };
 
 export default configureStore;

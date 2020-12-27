@@ -11,6 +11,12 @@ const TopicsForm = ({ topics }) => {
   const [value, setValue] = useState("");
   const dispatch = useDispatch();
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter" && value.trim()) {
+      handleClick();
+    }
+  };
+
   const handleChange = (e) => {
     setValue(e.target.value);
   };
@@ -20,6 +26,8 @@ const TopicsForm = ({ topics }) => {
     const isRepeated = topics.some(
       (el) => el.title.toLowerCase() === topic.title.toLowerCase()
     );
+
+    console.log(topic, isRepeated);
 
     if (isRepeated) {
       const warning = "Такой топик уже есть!";
@@ -46,6 +54,7 @@ const TopicsForm = ({ topics }) => {
           className="topicsFormInput"
           onChange={handleChange}
           value={value}
+          onKeyPress={handleKeyPress}
         />
       </div>
     </div>

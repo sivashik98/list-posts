@@ -6,6 +6,8 @@ import { disableInteraction, enableInteraction } from "./../actions/app";
 import { pushFetchedPost, removeFetchingStatus } from "./../actions/posts";
 import { showWarning } from "./../actions/app";
 
+const apiUrl = "https://www.reddit.com/r/";
+
 const getUniquePostHelper = (posts, existedPosts) => {
   return posts.filter((post) =>
     existedPosts.every((existedPost) => existedPost.id !== post.id)
@@ -13,9 +15,9 @@ const getUniquePostHelper = (posts, existedPosts) => {
 };
 
 const fetchPostHelper = (payload) => () => {
-  return fetch(
-    `https://www.reddit.com/r/${payload.title}.json`
-  ).then((response) => response.json());
+  return fetch(`${apiUrl}${payload.title}.json`).then((response) =>
+    response.json()
+  );
 };
 
 function* fetchPostWorker({ payload }) {
@@ -45,6 +47,6 @@ function* fetchPostWorker({ payload }) {
   }
 }
 
-export function* fetchPostWatcher() {
+export default function* postSaga() {
   yield takeEvery(FETCH_POST, fetchPostWorker);
 }
