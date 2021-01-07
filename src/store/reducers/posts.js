@@ -5,7 +5,7 @@ import {
   REORDER_POSTS,
   TOGGLE_LIKE_POST,
   DELETE_POST,
-} from "../constatns";
+} from "../constants";
 
 const initialState = {
   posts: [],

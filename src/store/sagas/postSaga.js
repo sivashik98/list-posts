@@ -1,7 +1,7 @@
 import { takeEvery, put, call } from "redux-saga/effects";
 import fetch from "isomorphic-fetch";
 
-import { FETCH_POST } from "../constatns";
+import { FETCH_POST } from "../constants";
 import { disableInteraction, enableInteraction } from "./../actions/app";
 import { pushFetchedPost, removeFetchingStatus } from "./../actions/posts";
 import { showWarning } from "./../actions/app";

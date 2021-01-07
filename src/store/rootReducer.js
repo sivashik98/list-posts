@@ -6,7 +6,7 @@ import {
   DELETE_POST,
   TOGGLE_LIKE_POST,
   REORDER_POSTS,
-} from "./constatns";
+} from "./constants";
 import posts from "./reducers/posts";
 import app from "./reducers/app";
 import topics from "./reducers/topics";

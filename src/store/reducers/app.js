@@ -3,7 +3,7 @@ import {
   ENABLE_INTERACTION,
   SHOW_WARNING,
   HIDE_WARNING,
-} from "../constatns";
+} from "../constants";
 
 const initialState = {
   interaction: true,

@@ -5,7 +5,7 @@ import {
   REORDER_POSTS,
   TOGGLE_LIKE_POST,
   DELETE_POST,
-} from "../constatns";
+} from "../constants";
 
 export const fetchPostByTopic = (topic, existedPosts) => ({
   type: FETCH_POST,

@@ -27,8 +27,6 @@ const TopicsForm = ({ topics }) => {
       (el) => el.title.toLowerCase() === topic.title.toLowerCase()
     );
 
-    console.log(topic, isRepeated);
-
     if (isRepeated) {
       const warning = "Такой топик уже есть!";
 

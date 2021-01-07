@@ -1,4 +1,4 @@
-import { CREATE_TOPIC } from "../constatns";
+import { CREATE_TOPIC } from "../constants";
 
 const initialState = {
   topics: [],
